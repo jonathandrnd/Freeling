@@ -1,17 +1,31 @@
 ===================================================
-Source code organization
+INSTALACION
 
-Compiler is written in CL and is placed in cl-meld
-Virtual machine is written in C++ and is placed in meld
-In order to compile programs we first use the CL compiler and then the C++ compiler.
+sudo apt-get install build-essential automake autoconf libtool git
+sudo apt-get install libboost-regex-dev libicu-dev zlib1g-dev
+sudo apt-get install libboost-system-dev libboost-program-options-dev libboost-thread-dev
+
+git clone https://github.com/TALP-UPC/FreeLing.git
+autoreconf --install
+./configure
+make
+sudo make install
 
 ===================================================
-How to compile CLM programs
+SETEAR VARIABLES DEL SISTEMA
 
-Go to meld/benchs
-Run script ./compile.sh progs/<program>.meld
-Compiler will generate a code/<program>.cpp file
-Go back to the meld directory: cd ..
-Compile final program with ./compile.sh benchs/code<program>.cpp
+LIBS="-lfreeling -lboost_system"
+PATHS="-L/usr/local/lib -I/usr/local/include -I/usr/local/include/foma -L/usr/local/lib -I/usr/local/include"
 
+===================================================
+AGREGAR LOS SIGUIENTES ARCHIVOS PARA GENERAR EL LEMA FACILMENTE
+
+lemaparser.h ,  sample.cpp
+https://github.com/jonathandrnd/Freeling
+
+===================================================
+COMANDO PARA COMPILAR Y EJECUTAR
+
+g++ -std=c++0x -o sample sample.cpp $PATHS $LIBS
+./sample
 ===================================================
