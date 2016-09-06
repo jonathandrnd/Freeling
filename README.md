@@ -1,6 +1,5 @@
 --------------------- Freeling -----------------
 -------------- INSTALACION ---------------------
-
 sudo apt-get install build-essential automake autoconf libtool git
 sudo apt-get install libboost-regex-dev libicu-dev zlib1g-dev
 sudo apt-get install libboost-system-dev libboost-program-options-dev libboost-thread-dev
@@ -15,7 +14,7 @@ sudo make install
 LIBS="-lfreeling -lboost_system"
 PATHS="-L/usr/local/lib -I/usr/local/include -I/usr/local/include/foma -L/usr/local/lib -I/usr/local/include"
 
-------------- AÑADIR LOS SIGUIENTES ARCHIVOS PARA GENERAR EL LEMA FACILMENTE -----------
+------------- AÃ‘ADIR LOS SIGUIENTES ARCHIVOS PARA GENERAR EL LEMA FACILMENTE -----------
 lemaparser.h ,  sample.cpp
 https://github.com/jonathandrnd/Freeling
 ------------- COMANDO PARA COMPILAR Y EJECUTAR -------------
