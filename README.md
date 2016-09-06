@@ -1,24 +1,17 @@
-FREELING 
-INSTALACION 
-sudo apt-get install build-essential automake autoconf libtool git
-sudo apt-get install libboost-regex-dev libicu-dev zlib1g-dev
-sudo apt-get install libboost-system-dev libboost-program-options-dev libboost-thread-dev
-git clone https://github.com/TALP-UPC/FreeLing.git
-autoreconf --install
-./configure
-make 
-sudo make install
+===================================================
+Source code organization
 
-SETEAR VARIABLES DEL SISTEMA 
-LIBS="-lfreeling -lboost_system"
-PATHS="-L/usr/local/lib -I/usr/local/include -I/usr/local/include/foma -L/usr/local/lib -I/usr/local/include"
+Compiler is written in CL and is placed in cl-meld
+Virtual machine is written in C++ and is placed in meld
+In order to compile programs we first use the CL compiler and then the C++ compiler.
 
-AÑADIR LOS SIGUIENTES ARCHIVOS PARA GENERAR EL LEMA FACILMENTE
-lemaparser.h , sample.cpp
-https://github.com/jonathandrnd/Freeling
+===================================================
+How to compile CLM programs
 
-COMANDO PARA COMPILAR Y EJECUTAR 
-g++ -std=c++0x -o sample sample.cpp $PATHS $LIBS ./sample
+Go to meld/benchs
+Run script ./compile.sh progs/<program>.meld
+Compiler will generate a code/<program>.cpp file
+Go back to the meld directory: cd ..
+Compile final program with ./compile.sh benchs/code<program>.cpp
 
-pagina de referencia de instalacion
-https://talp-upc.gitbooks.io/freeling-user-manual/content/installation.html
+===================================================
