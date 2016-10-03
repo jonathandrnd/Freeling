@@ -1,6 +1,7 @@
 #include<iostream>
 #include "freeling.h"
 #include "freeling/morfo/traces.h"
+#include <time.h>
 
 using namespace std;
 using namespace freeling;
@@ -27,45 +28,22 @@ string PrintLemma(list<sentence> &ls) {
 }
 
 
-string parserlemma(string s){
-    util::init_locale(L"default");
+
+
+string parserlemma(string s,maco &morfo){
     wstring ipath=L"/usr/local";
     wstring path=ipath+L"/share/freeling/es/";
     tokenizer tk(path+L"tokenizer.dat"); 
     splitter sp(path+L"splitter.dat");
     splitter::session_id sid=sp.open_session();
-    maco_options opt(L"es");
-    opt.UserMapFile=L"";
-    opt.LocutionsFile=path+L"locucions.dat"; opt.AffixFile=path+L"afixos.dat";
-    opt.ProbabilityFile=path+L"probabilitats.dat"; opt.DictionaryFile=path+L"dicc.src";
-    opt.NPdataFile=path+L"np.dat"; opt.PunctuationFile=path+L"../common/punct.dat"; 
-    maco morfo(opt);
-    morfo.set_active_options (false,// UserMap
-                             true, // NumbersDetection,
-                             true, //  PunctuationDetection,
-                             true, //  DatesDetection,
-                             true, //  DictionarySearch,
-                             true, //  AffixAnalysis,
-                             false, //  CompoundAnalysis,
-                             true, //  RetokContractions,
-                             true, //  MultiwordsDetection,
-                             true, //  NERecognition,
-                             false, //  QuantitiesDetection,
-                             true);  //  ProbabilityAssignment
-    hmm_tagger tagger(path+L"tagger.dat", true, FORCE_TAGGER); 
-    // create chunker 
-    chart_parser parser(path+L"chunker/grammar-chunk.dat");
-    // create dependency parser 
-    dep_txala dep(path+L"dep_txala/dependences.dat", parser.get_start_symbol());
-
     wstring text(s.begin(),s.end());
     list<word> lw=tk.tokenize(text);
     list<sentence> ls;
     sp.split(sid, lw, true, ls);
     morfo.analyze(ls);
     string answer=PrintLemma(ls);
-
     lw.clear(); ls.clear();    
     sp.close_session(sid);
+
     return answer;
-}	
+}
